@@ -19,7 +19,10 @@ function SambaClient(options) {
 }
 
 SambaClient.prototype.getFile = function(path, destination, cb) {
-  this.runCommand('get', path, destination, cb);
+  let fileName = path.replace(singleSlash, '\\');
+  let cmdArgs = util.format('%s %s', fileName, destination);
+
+  return this.execute('get', cmdArgs, '', cb);
 };
 
 SambaClient.prototype.sendFile = function(path, destination, cb) {

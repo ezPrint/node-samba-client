@@ -1,11 +1,11 @@
 {
-  "name": "samba-client",
-  "version": "2.1.0",
+  "name": "@joinsrl/samba-client",
+  "version": "2.1.1",
   "description": "wrapper for smbclient",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/eflexsystems/node-samba-client.git"
+    "url": "git+https://github.com/ezPrint/node-samba-client.git"
   },
   "keywords": [
     "samba",
@@ -16,7 +16,10 @@
   "author": "eFlex Systems",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/eflexsystems/node-samba-client/issues"
+    "url": "https://github.com/ezPrint/node-samba-client/issues"
   },
-  "homepage": "https://github.com/eflexsystems/node-samba-client"
+  "homepage": "https://github.com/ezPrint/node-samba-client",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
 }
