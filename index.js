@@ -20,7 +20,7 @@ function SambaClient(options) {
 
 SambaClient.prototype.getFile = function(path, destination, cb) {
   let fileName = path.replace(singleSlash, '\\');
-  let cmdArgs = util.format('%s %s', fileName, destination);
+  let cmdArgs = util.format('"%s" "%s"', fileName, destination);
 
   return this.execute('get', cmdArgs, '', cb);
 };
@@ -97,7 +97,7 @@ SambaClient.prototype.getSmbClientArgs = function(fullCmd) {
 };
 
 SambaClient.prototype.execute = function(cmd, cmdArgs, workingDir, cb) {
-  var fullCmd = wrap(util.format('%s %s', cmd, cmdArgs));
+  var fullCmd = wrap(util.format('"%s" "%s"', cmd, cmdArgs));
 
   var command = ['smbclient', this.getSmbClientArgs(fullCmd).join(' ')].join(' ');
 
@@ -117,7 +117,7 @@ SambaClient.prototype.execute = function(cmd, cmdArgs, workingDir, cb) {
 SambaClient.prototype.runCommand = function(cmd, path, destination, cb) {
   var workingDir   = p.dirname(path);
   var fileName     = p.basename(path).replace(singleSlash, '\\');
-  var cmdArgs      = util.format('%s %s', fileName, destination);
+  var cmdArgs      = util.format('"%s" "%s"', fileName, destination);
 
   this.execute(cmd, cmdArgs, workingDir, cb);
 };
