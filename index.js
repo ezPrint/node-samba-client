@@ -76,17 +76,13 @@ SambaClient.prototype.fileExists = function(remotePath, cb) {
 };
 
 SambaClient.prototype.getSmbClientArgs = function(fullCmd) {
-  var args = ['-U', this.username];
+  var args = ['-U', this.username + (this.password ? '%' + this.password : '')];
 
   if (!this.password) {
     args.push('-N');
   }
 
   args.push('-c', fullCmd, this.address);
-
-  if (this.password) {
-    args.push(this.password);
-  }
 
   if (this.domain) {
     args.push('-W');
