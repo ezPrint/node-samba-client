@@ -43,16 +43,19 @@ SambaClient.prototype.listFiles = function(fileNamePrefix, fileNameSuffix, cb) {
     } else if (err) {
       return cb(err, allOutput);
     }
+
     var lines = allOutput.split('\n');
-    for (var i = 0; i < lines.length; i++) {
+
+    for (var i = 0; i < lines.length - 2; i++) {
       var line = lines[i].toString().trim();
-      if (line.startsWith(fileNamePrefix)) {
-        var parsed = line.substring(0, line.indexOf(fileNameSuffix) + fileNameSuffix.length);
-        fileList.push(parsed);
+      var parsed = line.substring(0, line.indexOf(fileNameSuffix) + fileNameSuffix.length);
+
+      if (parsed.trim() !== '') {
+        fileList.push(parsed.trim());
       }
     }
     cb(null, fileList);
-	});
+  });
 };
 
 SambaClient.prototype.mkdir = function(remotePath, cb) {
@@ -100,6 +103,8 @@ SambaClient.prototype.execute = function(cmd, cmdArgs, workingDir, cb) {
   var options = {
     cwd : workingDir
   };
+
+  console.log(command);
 
   exec(command, options, function(err, stdout, stderr) {
     var allOutput = (stdout + stderr);
